@@ -1,2 +1,7 @@
-# Jupiter Stack
-Jupiter, Education and Research Archive user interface development stack includes Fedora digital repository, Apache Solr, PostgreSQL, Redis, Nginx and Rails. 
+# Triplestore Stack
+Rails, Nginx, Redis, PostgreSQL, Solr, Fedora, ActiveMQ, Karaf and GraphDB
+## GraphDB
+### Initailize
+```shell
+    $ docker exec -it triplestore_graphdb_1 /opt/graphdb/init/create_repositories.sh
+```
