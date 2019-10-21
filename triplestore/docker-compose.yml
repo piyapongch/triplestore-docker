@@ -109,6 +109,6 @@ services:
     restart: always
     volumes:
       - graphdb:/opt
-      - "/opt/graphdb/home/import:/opt/graphdb/home/import"
+      - "./graphdb/import:/opt/graphdb/home/import"
     ports:
       - "7200:7200"
