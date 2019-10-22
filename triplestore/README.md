@@ -1,6 +1,14 @@
 # Triplestore Stack
 Rails, Nginx, Redis, PostgreSQL, Solr, Fedora, ActiveMQ, Karaf and GraphDB
 
+## Jupiter
+### Setup Database
+
+```shell
+$ docker-compose run web rails db:migrate
+$ docker-compose run web rails db:setup
+```
+
 ## GraphDB
 ### Setup Repositoreis
 
@@ -12,6 +20,7 @@ Rails, Nginx, Redis, PostgreSQL, Solr, Fedora, ActiveMQ, Karaf and GraphDB
     $ sudo cp settings ./graphdb/work/workbench/
     $ docker-compose start graphdb
 ```
+
 ## Karaf
 ### Reindex Fedora Triplestore
 
