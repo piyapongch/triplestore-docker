@@ -13,6 +13,8 @@ volumes:
     driver: local
   file-storage:
     driver: local
+  karaf:
+    driver: local
   graphdb:
     driver: local
 
@@ -103,6 +105,8 @@ services:
       - "1099:1099"
       - "8101:8101"
       - "44444:44444"
+    volumes: 
+      - karaf:/opt
 
   graphdb:
     image: pcharoen/graphdb:9.0.0-free
