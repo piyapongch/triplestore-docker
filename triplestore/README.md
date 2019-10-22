@@ -1,8 +1,12 @@
 # Triplestore Stack
 Rails, Nginx, Redis, PostgreSQL, Solr, Fedora, ActiveMQ, Karaf and GraphDB
 ## GraphDB
-### Initailize
+### Initailization
 ```shell
     $ docker exec -it triplestore_graphdb_1 /opt/graphdb/init/create_repositories.sh
-    $ docker-compose restart graphdb
+    $ docker-compose stop graphdb
+    $ sudo cp owlim.properties ./graphdb/data/repositories/fedora/storage/
+    $ sudo cp owlim.properties ./graphdb/data/repositories/audit/storage/
+    $ sudo cp settings ./graphdb/work/workbench/
+    $ docker-compose start graphdb
 ```
