@@ -10,7 +10,7 @@ $ docker-compose run web rails db:setup
 ```
 
 ## GraphDB
-### Setup Repositoreis
+### Setup Repositories
 
 ```shell
     $ docker exec -it triplestore_graphdb_1 /opt/graphdb/init/create_repositories.sh
