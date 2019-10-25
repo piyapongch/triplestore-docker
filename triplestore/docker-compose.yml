@@ -102,7 +102,7 @@ services:
   karaf:
     image: pcharoen/karaf:4.0.10
     depends_on: 
-      - activemq
+      - fcrepo
       - graphdb
     ports:
       - "8181:8181"
