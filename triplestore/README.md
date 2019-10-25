@@ -9,9 +9,11 @@ This is a complete end-to-end Triplestore stack. It includes Jupiter stack as a 
 - Redis 
 - PostgreSQL 
 - Solr
+
 ### Repository
 - Tomcat8
 - Fedora4
+
 ### Backend
 - ActiveMQ
 - Karaf
@@ -27,20 +29,38 @@ This is a complete end-to-end Triplestore stack. It includes Jupiter stack as a 
   - Lucene Connector
 
 ## Startup
-
 ```shell
 $ docker-compose up -d
 ```
 
 ## Jupiter
-### Setup Database
 
+### Setup Database
 ```shell
 $ docker-compose run web rails db:migrate
 $ docker-compose run web rails db:setup
 ```
 
+### UI
+```shell
+http://localhost
+```
+
+### Fedora
+```shell
+http://localhost:8080/fcrepo
+```
+
+## ActiveMQ
+
+### UI
+```shell
+http://localhost:8161
+login: admin/admin
+```
+
 ## GraphDB
+
 ### Setup Repositories
 
 ```shell
@@ -52,9 +72,20 @@ $ docker-compose run web rails db:setup
     $ docker-compose start graphdb
 ```
 
-## Karaf
-### Reindex Fedora Triplestore
+### UI
+```shell
+http://localhost:7200
+```
 
+## Karaf
+
+### UI
+```shell
+http://localhost:8181
+login: karaf/karaf
+```
+
+### Reindex Triplestore
 ```shell
 $ curl -XPOST localhost:9080/reindexing/uat -H"Content-Type: application/json"   -d '["broker:queue:triplestore.reindex"]'
 ```

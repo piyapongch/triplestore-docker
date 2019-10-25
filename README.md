@@ -1,6 +1,3 @@
 # triplestore-docker
 
-## Jupiter Front End Stack
-
-## Triplestore Back End Stack
-
+Triplestore Docker Stack
