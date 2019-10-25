@@ -42,6 +42,8 @@ services:
   fcrepo:
     restart: always
     image: pcharoen/fcrepo:4.7.4.t1
+    depends_on: 
+      - activemq
     volumes:
       - fcrepo:/fcrepo4-data
     env_file:
@@ -99,6 +101,9 @@ services:
 
   karaf:
     image: pcharoen/karaf:4.0.10
+    depends_on: 
+      - activemq
+      - graphdb
     ports:
       - "8181:8181"
       - "9080:9080"
