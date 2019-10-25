@@ -1,5 +1,36 @@
 # Triplestore Stack
-Rails, Nginx, Redis, PostgreSQL, Solr, Fedora, ActiveMQ, Karaf and GraphDB
+This is a complete end-to-end Triplestore stack. It includes Jupiter stack as a frontend application, Fedora stack as a repository and triplstore stack, ActiveMQ, Karaf, Fedora's Camel components and GraphDB as a triplstore.
+
+## Services
+
+### Frontend
+- Rails
+- Nginx 
+- Redis 
+- PostgreSQL 
+- Solr
+### Repository
+- Tomcat8
+- Fedora4
+### Backend
+- ActiveMQ
+- Karaf
+  - fcrepo-service-activemq
+  - fcrepo-indexing-triplestore
+  - fcrepo-fixity
+  - fcrepo-audit-triplestore
+  - fcrepo-serialization
+  - fcrepo-reindexing
+  - hawtio
+  - jolokia
+- GraphDB
+  - Lucene Connector
+
+## Startup
+
+```shell
+$ docker-compose up -d
+```
 
 ## Jupiter
 ### Setup Database
