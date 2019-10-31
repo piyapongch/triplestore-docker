@@ -51,6 +51,16 @@ http://localhost
 http://localhost:8080/fcrepo
 ```
 
+### OAI Provider
+```shell
+http://localhost:8080/fcrepo/rest/oai?verb=Identify
+```
+
+### Solr
+```shell
+http://localhost:8983
+```
+
 ## ActiveMQ
 
 ### UI
@@ -81,11 +91,31 @@ http://localhost:7200
 
 ### UI
 ```shell
-http://localhost:8181
+http://localhost:8181/hawtio
 login: karaf/karaf
 ```
 
 ### Reindex Triplestore
 ```shell
 $ curl -XPOST localhost:9080/reindexing/uat -H"Content-Type: application/json"   -d '["broker:queue:triplestore.reindex"]'
+```
+
+### Reindex Solr
+```shell
+$ curl -XPOST localhost:9080/reindexing/uat -H"Content-Type: application/json"   -d '["broker:queue:solr.reindex"]'
+```
+
+### Reindex Fixity
+```shell
+$ curl -XPOST localhost:9080/reindexing/uat -H"Content-Type: application/json"   -d '["broker:queue:fixity"]'
+```
+
+### Reindex Serialization
+```shell
+$ curl -XPOST localhost:9080/reindexing/uat -H"Content-Type: application/json"   -d '["broker:queue:serialization"]'
+```
+
+### Reindex All 
+```shell
+$ curl -XPOST localhost:9080/reindexing/uat -H"Content-Type: application/json"   -d '["broker:queue:triplestore.reindex", "broker:queue:solr.reindex", "broker:queue:fixity", "broker:queue:serialization"]'
 ```
