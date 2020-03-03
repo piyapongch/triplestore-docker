@@ -78,9 +78,14 @@ login: admin/admin
     $ docker-compose stop graphdb
     $ sudo cp owlim.properties ./graphdb/data/repositories/fedora/storage/
     $ sudo cp owlim.properties ./graphdb/data/repositories/audit/storage/
-    $ sudo cp settings ./graphdb/work/workbench/
+    $ sudo cp settings.js ./graphdb/work/workbench/
     $ docker-compose start graphdb
 ```
+  Or, run ./setup_graphdb.sh
+```shell
+    $ ./setup_graphdb.sh
+```
+
 
 ### UI
 ```shell
