@@ -86,6 +86,16 @@ login: admin/admin
     $ ./setup_graphdb.sh
 ```
 
+### Import Data
+- Create directory ./graphdb/import
+```shell
+    $ mkdir ./graphdb/import
+```
+- Copy export data to ./graphdb/import
+```shell
+    $ cp statements.trig ./graphdb/import
+```
+- Use Graphdb Workbrench to import data on the server
 
 ### UI
 ```shell
