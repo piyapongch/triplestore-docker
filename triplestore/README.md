@@ -29,10 +29,20 @@ This is a complete end-to-end Triplestore stack. It includes Jupiter stack as a 
   - Lucene Connector
 
 ## Startup
+Start up all services: postgres, solr, fcrepo, radis, worker, web, nginx, activemq, karaf and graphdb
 ```shell
 $ docker-compose up -d
 ```
+Start individual service
+```shell
+$ docker-compose up -d ${service}
+```
+Use command ```$ docker-compose ps -a``` to check docker container
 
+If container already exists, use following command to start the service
+```shell
+$ docker-compose start ${service}
+```
 ## Jupiter
 
 ### Setup Database
