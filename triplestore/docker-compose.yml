@@ -117,7 +117,7 @@ services:
 
   graphdb:
     image: pcharoen/graphdb:9.0.0-free
-    restart: always
+    restart: "no"
     volumes:
       - graphdb:/opt
       - ./graphdb:/opt/graphdb/home
