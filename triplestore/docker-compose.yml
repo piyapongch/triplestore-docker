@@ -116,8 +116,9 @@ services:
       - karaf:/opt
 
   graphdb:
+    container_name: graphdb
     image: pcharoen/graphdb:9.0.0-free
-    restart: "no"
+    restart: unless-stopped
     volumes:
       - graphdb:/opt
       - ./graphdb:/opt/graphdb/home
