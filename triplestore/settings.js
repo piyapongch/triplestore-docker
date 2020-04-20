@@ -704,11 +704,6 @@
         "body" : "PREFIX : <http://www.ontotext.com/connectors/lucene#>\nPREFIX inst: <http://www.ontotext.com/connectors/lucene/instance#>\n\nSELECT ?totalHits {\n    ?r a inst:pcdm_object ;\n       :query \"title:alberta\" ;\n       :totalHits ?totalHits .\n}\n",
         "shared" : false
       },
-      "Find by ContentModel and LastModified" : {
-        "name" : "Find by ContentModel and LastModified",
-        "body" : "PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>\nPREFIX fedora: <http://fedora.info/definitions/v4/repository#>\nPREFIX model: <info:fedora/fedora-system:def/model#>\nselect ?s ?p ?date \nwhere {\n  ?s fedora:lastModified ?date .\n  ?s model:hasModel \"IRItem\"\n  FILTER (?date > \"2018-04-01T00:00:00.000Z\"^^xsd:dateTime && ?date < \"2018-04-06T23:59:59.999Z\"^^xsd:dateTime)\n}",
-        "shared" : false
-      },
       "Clear graph" : {
         "name" : "Clear graph",
         "body" : "CLEAR GRAPH <http://example>",
@@ -734,16 +729,6 @@
         "body" : "DELETE\nWHERE { \n  ?s <info:fedora/fedora-system:def/model#hasModel> \"ActiveFedora::DirectContainer\"; \n  ?p ?o .\n}\n",
         "shared" : false
       },
-      "Find Object Info with Content Checksum" : {
-        "name" : "Find Object Info with Content Checksum",
-        "body" : "select *\nwhere { \n\t?s <info:fedora/fedora-system:def/model#hasModel> \"GenericFile\";\n    <http://purl.org/dc/terms/title> ?t;\n    <http://fedora.info/definitions/v4/repository#uuid> ?u .\noptional {\n    ?s <http://www.w3.org/ns/ldp#contains> ?c .\n    ?c <http://fedora.info/definitions/v4/repository#digest> ?d .\n    filter regex(str(?c), \"content$\", \"i\")\n  }\n} limit 100",
-        "shared" : true
-      },
-      "Find Object Info with Content Checksum (Optional)" : {
-        "name" : "Find Object Info with Content Checksum (Optional)",
-        "body" : "select *\nwhere { \n\t?s <info:fedora/fedora-system:def/model#hasModel> \"GenericFile\";\n    <http://purl.org/dc/terms/title> ?t;\n    <http://fedora.info/definitions/v4/repository#uuid> ?u .\noptional {\n    ?s <http://www.w3.org/ns/ldp#contains> ?c .\n    ?c <http://fedora.info/definitions/v4/repository#digest> ?d .\n    filter regex(str(?c), \"content$\", \"i\")\n  }\n}\n",
-        "shared" : false
-      },
       "Find HN Fedora 4.2 Data Object Info" : {
         "name" : "Find HN Fedora 4.2 Data Object Info",
         "body" : "# hn_fedora_data result columns\n# PID,UUID,handle,title,deposit date,# DCQ datastreams,# DC datastreams,# DS datastreams,# LICENSE datastreams,DCQ IDs,DCQ MD5s,DCQ version changes,DS IDs,DS MD5s,DS MIME Type,DS version changes,LICENSE IDs,LICENSE version changes\n\n#select (count(*) as ?count)\nselect ?pid ?uuid ?handle ?doi ?title ?deposit_date ?fcrepo3_created_date ?fcrepo4_created_date ?file_name ?file_size ?checksum ?mime_type ?license\nwhere { \n\t?s <info:fedora/fedora-system:def/model#hasModel> \"GenericFile\";\n    optional {\n    ?s <http://terms.library.ualberta.ca/id/fedora3uuid> ?pid;\n    <http://fedora.info/definitions/v4/repository#uuid> ?uuid;\n    <http://terms.library.ualberta.ca/id/fedora3handle> ?handle;\n    <http://terms.library.ualberta.ca/id/doi> ?doi;\n    <http://purl.org/dc/terms/title> ?title;\n    <http://purl.org/dc/terms/dateAccepted> ?deposit_date; # deposit_date\n    <info:fedora/fedora-system:def/model#createdDate> ?fcrepo3_created_date; # deposit_date\n    <http://fedora.info/definitions/v4/repository#created> ?fcrepo4_created_date; # deposit_date\n    <http://purl.org/dc/terms/license> ?license;\n    <http://www.w3.org/ns/ldp#contains> ?c .\n    ?c <http://www.loc.gov/premis/rdf/v1#hasOriginalName> ?file_name;\n    <http://fedora.info/definitions/v4/repository#digest> ?cheksum;\n    <http://fedora.info/definitions/v4/repository#mimeType> ?mime_type;\n    <http://www.loc.gov/premis/rdf/v1#hasSize> ?file_size\n    .\n    filter regex(str(?c), \"content$\", \"i\")\n    }\n}\nlimit 100",
@@ -751,13 +736,33 @@
       },
       "Find Last Deleted Objects" : {
         "name" : "Find Last Deleted Objects",
-        "body" : "PREFIX premis: <http://www.loc.gov/premis/rdf/v1#>\nselect ?o ?d\nwhere {\n  ?s premis:hasEventDateTime ?d;\n  ?p <http://id.loc.gov/vocabulary/preservation/eventType/del>;\n  <http://www.loc.gov/premis/rdf/v1#hasEventRelatedObject> ?o .\n}\norder by desc(?d)\nlimit 10",
+        "body" : "PREFIX premis: <http://www.loc.gov/premis/rdf/v1#>\nselect ?s ?o ?d\nwhere {\n  ?s premis:hasEventDateTime ?d;\n  ?p <http://id.loc.gov/vocabulary/preservation/eventType/del>;\n  <http://www.loc.gov/premis/rdf/v1#hasEventRelatedObject> ?o .\n}\norder by desc(?d)\nlimit 10",
         "shared" : true
       },
       "Count Event by Agent" : {
         "name" : "Count Event by Agent",
         "body" : "SELECT ?o (COUNT(*) AS ?count)\nWHERE {\n  ?s <http://www.loc.gov/premis/rdf/v1#hasEventRelatedAgent> ?o .\n}\nGROUP BY ?o",
         "shared" : true
+      },
+      "Find by ContentModel & LastModified" : {
+        "name" : "Find by ContentModel & LastModified",
+        "body" : "PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>\nPREFIX fedora: <http://fedora.info/definitions/v4/repository#>\nPREFIX model: <info:fedora/fedora-system:def/model#>\nselect ?s ?p ?date \nwhere {\n  ?s fedora:lastModified ?date .\n  ?s model:hasModel \"IRItem\"\n  FILTER (?date > \"2018-04-01T00:00:00.000Z\"^^xsd:dateTime && ?date < \"2018-04-06T23:59:59.999Z\"^^xsd:dateTime)\n}",
+        "shared" : false
+      },
+      "Find LastModified Objects by Model" : {
+        "name" : "Find LastModified Objects by Model",
+        "body" : "PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>\nPREFIX fedora: <http://fedora.info/definitions/v4/repository#>\nPREFIX model: <info:fedora/fedora-system:def/model#>\nselect ?s \nwhere {\n  ?s fedora:lastModified ?date .\n  ?s model:hasModel \"Hydra::Works::FileSet\" .\n}\noffset 15000\nlimit 5\n",
+        "shared" : true
+      },
+      "Find Object with Checksum" : {
+        "name" : "Find Object with Checksum",
+        "body" : "select *\nwhere { \n\t?s <info:fedora/fedora-system:def/model#hasModel> \"GenericFile\";\n    <http://purl.org/dc/terms/title> ?t;\n    <http://fedora.info/definitions/v4/repository#uuid> ?u .\noptional {\n    ?s <http://www.w3.org/ns/ldp#contains> ?c .\n    ?c <http://fedora.info/definitions/v4/repository#digest> ?d .\n    filter regex(str(?c), \"content$\", \"i\")\n  }\n} limit 100",
+        "shared" : true
+      },
+      "Find Object with Checksum (Optional)" : {
+        "name" : "Find Object with Checksum (Optional)",
+        "body" : "select *\nwhere { \n\t?s <info:fedora/fedora-system:def/model#hasModel> \"GenericFile\";\n    <http://purl.org/dc/terms/title> ?t;\n    <http://fedora.info/definitions/v4/repository#uuid> ?u .\noptional {\n    ?s <http://www.w3.org/ns/ldp#contains> ?c .\n    ?c <http://fedora.info/definitions/v4/repository#digest> ?d .\n    filter regex(str(?c), \"content$\", \"i\")\n  }\n}\n",
+        "shared" : false
       }
     }
   },
