@@ -122,5 +122,6 @@ services:
     volumes:
       - graphdb:/opt
       - ./graphdb:/opt/graphdb/home
+      - /Users/pcharoen/Dropbox/GraphDB/import:/opt/graphdb/home/import 
     ports:
       - "7200:7200"
