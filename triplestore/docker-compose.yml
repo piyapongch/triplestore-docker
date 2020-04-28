@@ -117,7 +117,7 @@ services:
 
   graphdb:
     container_name: graphdb
-    image: pcharoen/graphdb:9.0.0-free
+    image: pcharoen/graphdb:9.2.0-free
     restart: "no"
     volumes:
       - graphdb:/opt
